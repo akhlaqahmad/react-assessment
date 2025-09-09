@@ -1,35 +1,33 @@
+import React, { useRef, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
   LineChart,
   Line,
-  BarChart,
-  Bar,
-  PieChart,
-  Pie,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
-  Cell,
+  ResponsiveContainer,
 } from 'recharts';
 
 export const SalesLineChart = () => {
-    const data = useSelector((state) => state.chart.lineChartData);
+    const data = useSelector((state: any) => state.chart.lineChartData);
     
     return (
-      <div className="p-4 bg-white rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4">Monthly Performance</h2>
-        <LineChart width={600} height={300} data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="month" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="sales" stroke="#8884d8" />
-          <Line type="monotone" dataKey="revenue" stroke="#82ca9d" />
-          <Line type="monotone" dataKey="profit" stroke="#ffc658" />
-        </LineChart>
+      <div className="w-full h-full" style={{ minHeight: '200px', height: '100%' }}>
+        <ResponsiveContainer width="100%" height="100%" minHeight={200}>
+          <LineChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="month" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="sales" stroke="#8884d8" strokeWidth={2} />
+            <Line type="monotone" dataKey="revenue" stroke="#82ca9d" strokeWidth={2} />
+            <Line type="monotone" dataKey="profit" stroke="#ffc658" strokeWidth={2} />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
     );
   };
